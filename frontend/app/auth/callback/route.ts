@@ -4,6 +4,9 @@ import { NextResponse } from 'next/server'
 export async function GET(request) {
   const { searchParams, origin } = new URL(request.url)
   // 1. Extract authorization code from URL
+
+  // searchParams
+  // URLSearchParams { 'code' => 'bdff58a2-8253-417d-b2ba-e398f889fc27' }
   const code = searchParams.get('code')
   const next = searchParams.get('next') ?? '/'
 

@@ -17,7 +17,11 @@ const signInWith = provider => async () => {
         },
     })
 
-    console.log(data, error)
+//  data, error
+// {
+//   provider: 'google',
+//   url: 'https://rcczpxrmdypytbtkkyij.supabase.co/auth/v1/authorize?provider=google&redirect_to=http%3A%2F%2Flocalhost%3A3000%2Fauth%2Fcallback&code_challenge=ALqgad2o8WDs6Cd-Y_adi3tfPJC6KGDomMdcJV5_SGU&code_challenge_method=s256'
+// } null
 
     if (error) {
         throw new Error(error.message)
