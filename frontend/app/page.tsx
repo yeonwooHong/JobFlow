@@ -2,6 +2,7 @@ import { createClient } from './utils/supabase/server'
 import { redirect } from 'next/navigation'
 import { signOut } from './utils/actions'
 
+
 export default async function Home() {
   const supabase = await createClient()
   // const session = await supabase.auth.getUser()

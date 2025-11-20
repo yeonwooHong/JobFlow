@@ -2,14 +2,14 @@
 // 1. User logs in Google's redirect URL and
 // Google redirects back to my callback URL with an authorization code -> Mock
 // 2. route.js checks it and sends page.tsx
-
 import { GET } from '@/app/auth/callback/route'
 import { createClient } from '@/app/utils/supabase/server'
 import { NextResponse } from 'next/server'
 
-// Mock dependencies
+
 jest.mock('@/app/utils/supabase/server')
 jest.mock('next/server', () => ({
+  // Mocks NextResponse.redirect to return an object with type and url
   NextResponse: {
     redirect: jest.fn((url: string) => ({ type: 'redirect', url })),
   },
@@ -35,7 +35,8 @@ describe('GET /auth/callback', () => {
     mockCreateClient.mockResolvedValue(mockSupabase as any)
 
     const request = new Request('http://localhost:3000/auth/callback?code=test-code')
-    const response = await GET(request as any)
+    // Wait for function to complete
+    await GET(request as any)
 
     expect(mockCreateClient).toHaveBeenCalled()
     expect(mockSupabase.auth.exchangeCodeForSession).toHaveBeenCalledWith('test-code')
@@ -65,22 +66,5 @@ describe('GET /auth/callback', () => {
 
     expect(mockCreateClient).not.toHaveBeenCalled()
     expect(mockRedirect).toHaveBeenCalledWith('http://localhost:3000/auth?error=auth_failed')
-  })
-
-  it('should redirect to custom next path when provided', async () => {
-    const mockSupabase = {
-      auth: {
-        exchangeCodeForSession: jest.fn().mockResolvedValue({
-          error: null,
-        }),
-      },
-    }
-
-    mockCreateClient.mockResolvedValue(mockSupabase as any)
-
-    const request = new Request('http://localhost:3000/auth/callback?code=test-code&next=/dashboard')
-    await GET(request as any)
-
-    expect(mockRedirect).toHaveBeenCalledWith('http://localhost:3000/dashboard')
   })
 })

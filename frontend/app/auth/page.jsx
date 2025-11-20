@@ -1,5 +1,6 @@
 import AuthForm from '@/components/Forms/AuthForm'
 
+
 const page = ({ searchParams }) => {
   const error = searchParams?.error // Extract error message from URL
   
