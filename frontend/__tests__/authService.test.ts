@@ -2,7 +2,7 @@
 // 1. User logs in Google's redirect URL and
 // Google redirects back to my callback URL with an authorization code -> Mock
 // 2. route.js checks it and sends page.tsx
-import { GET } from '@/app/auth/callback/route'
+import { GET } from '@/app/auth/authService'
 import { createClient } from '@/app/utils/supabase/server'
 import { NextResponse } from 'next/server'
 

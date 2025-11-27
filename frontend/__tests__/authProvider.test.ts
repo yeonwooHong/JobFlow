@@ -3,7 +3,7 @@
 // 1. Create a server side Supabse client -> Mock
 // 2. Call supabase.auth.signInWithOAuth -> Mock
 // 3. Google's redirect URL -> Mock
-import { signInWithGoogle } from '@/app/utils/actions'
+import { signInWithGoogle } from '@/app/auth/authProvider'
 import { createClient } from '@/app/utils/supabase/server'
 import { redirect } from 'next/navigation'
 

@@ -3,7 +3,7 @@ import { createClient } from '@/app/utils/supabase/server'
 import { redirect } from 'next/navigation'
 
 
-const signInWith = provider => async () => {
+const signInWith = (provider: any) => async () => {
     // 1. Create Supabase client on server
     const supabase = await createClient()
     // 2. Build callback URL

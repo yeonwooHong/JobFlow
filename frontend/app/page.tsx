@@ -1,6 +1,6 @@
 import { createClient } from './utils/supabase/server'
 import { redirect } from 'next/navigation'
-import { signOut } from './utils/actions'
+import { signOut } from './auth/authProvider'
 
 
 export default async function Home() {
