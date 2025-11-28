@@ -24,6 +24,7 @@ describe('signInWithGoogle', () => {
     process.env.SITE_URL = 'http://localhost:3000'
   })
 
+  // Test: Google OAuth login success
   it('should redirect to Google OAuth URL on success', async () => {
     const mockSupabase = {
       auth: {
@@ -35,10 +36,11 @@ describe('signInWithGoogle', () => {
       },
     }
 
-    // createClient() returns the mock Supabase client
+    // mockCreateClient() returns the mock Supabase client
     // as any bypasses TypeScript checks
     mockCreateClient.mockResolvedValue(mockSupabase as any)
 
+    // Wait for function to complete
     await signInWithGoogle()
     // Asserts createClient was called
     expect(mockCreateClient).toHaveBeenCalled()
@@ -53,6 +55,7 @@ describe('signInWithGoogle', () => {
     expect(mockRedirect).toHaveBeenCalledWith('https://accounts.google.com/oauth')
   })
 
+  // Test: Google OAuth login fail
   it('should throw error when OAuth fails', async () => {
     const mockSupabase = {
       auth: {

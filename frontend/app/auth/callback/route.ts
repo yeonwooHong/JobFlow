@@ -1,9 +1,10 @@
 import { createClient } from '@/app/utils/supabase/server'
-import { NextResponse } from 'next/server'
+import { NextResponse, NextRequest } from 'next/server'
 
 
-export async function GET(request: any) {
-  const { searchParams, origin } = new URL(request.url)
+
+export async function GET(request: NextRequest) {
+  const { searchParams, origin } = new URL(request.url) // String to URL obj
   // 1. Extract authorization code from URL
 
   // searchParams
