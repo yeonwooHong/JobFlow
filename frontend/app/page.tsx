@@ -1,10 +1,9 @@
 import { createClient } from './utils/supabase/server'
 import { redirect } from 'next/navigation'
 import { signOut } from './auth/authProvider'
+import { getJobs } from '@/lib/services/jobs'
 import { JobTable } from '@/components/JobTable'
 import { PaginationControls } from "@/components/PaginationControls"
-
-// Status badges's color styles
 
 export default async function Home({ searchParams }: {
   searchParams: Promise<{ page?: string }>
@@ -18,23 +17,12 @@ export default async function Home({ searchParams }: {
 
   if (!userData.data.user) redirect('/auth')
 
-  // Pagination logic
+  // Page size and current page to pass
   const pageSize = 10
-  const currentPage = Number(params.page) || 1 // related 1.
+  const currentPage = Number(params.page) || 1
 
-  const from = (currentPage - 1) * pageSize
-  const to = from + pageSize - 1
-
-  // Fetch data and total count using { count: 'exact' }
-  const { data: jobs, error, count } = await supabase
-    .from('jobs')
-    .select(
-    'id, title, employer_name, posted_at, created_at, status',
-    { count: 'exact' }
-    )
-    .order('posted_at', { ascending: false, nullsFirst: false })
-    .order('created_at', { ascending: false })
-    .range(from, to)
+  // Get job data from the service
+  const { data: jobs, error, count } = await getJobs(supabase, currentPage, pageSize)
 
   // Calculate total pages if there's count
   const totalPages = count ? Math.ceil(count / pageSize) : 0
