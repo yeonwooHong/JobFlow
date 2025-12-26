@@ -5,7 +5,7 @@ dotenv.config(); // .env file load
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY // To bypass Row Level Security
+  process.env.SUPABASE_PUBLISHABLE_KEY
 );
 
 export default supabase;
