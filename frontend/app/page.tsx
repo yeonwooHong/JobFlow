@@ -1,15 +1,7 @@
 import { createClient } from './utils/supabase/server'
 import { redirect } from 'next/navigation'
 import { signOut } from './auth/authProvider'
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-  PaginationEllipsis
-} from "@/components/ui/pagination"
+import { PaginationControls } from "@/components/ui/PaginationControls"
 
 // Status badges's color styles
 const getStatusStyle = (status: string) => {
@@ -123,60 +115,8 @@ export default async function Home({ searchParams }: {
           </tbody>
         </table>
       </div>
+      <PaginationControls currentPage={currentPage} totalPages={totalPages} />
 
-       {/* Pagination */}
-        <div className="px-6 py-4 border-t border-slate-100 flex items-center justify-between bg-slate-50/30">
-
-          <Pagination className="justify-center">
-            <PaginationContent>
-
-            {/* Previous button */}
-              <PaginationItem>
-                <PaginationPrevious 
-                  href={`/?page=${currentPage - 1}`}
-                  // Disable if on first page
-                  className={currentPage <= 1 ? "pointer-events-none opacity-40" : ""}
-                />
-              </PaginationItem>
-
-              {/* Jump to first page */}
-              {startPage > 1 && (
-                <>
-                  <PaginationItem><PaginationLink href="/?page=1">1</PaginationLink></PaginationItem>
-                  <PaginationItem><PaginationEllipsis /></PaginationItem>
-                </>
-              )}
-
-              {/* Page Numbers*/}
-              {Array.from({ length: (endPage - startPage) + 1 }, (_, i) => startPage + i).map((page) => (
-                <PaginationItem key={page}>
-                {/* Highlight current page number */}
-                  <PaginationLink href={`/?page=${page}`} isActive={currentPage === page}>
-                    {page}
-                  </PaginationLink>
-                </PaginationItem>
-              ))}
-
-              {/* Jump to last page */}
-              {endPage < totalPages && (
-                <>
-                  <PaginationItem><PaginationEllipsis /></PaginationItem>
-                  <PaginationItem><PaginationLink href={`/?page=${totalPages}`}>{totalPages}</PaginationLink></PaginationItem>
-                </>
-              )}
-
-            {/* Next button */}  
-              <PaginationItem>
-                <PaginationNext 
-                  href={`/?page=${currentPage + 1}`}
-                  // Disable if on last page
-                  className={currentPage >= totalPages ? "pointer-events-none opacity-40" : ""}
-                />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
-      
-      </div>
     </main>
   )
 
