@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import { signInWithGoogle } from '@/app/utils/actions'
+import { signInWithGoogle } from '@/app/auth/authProvider'
 
 
 const AuthForm = () => {

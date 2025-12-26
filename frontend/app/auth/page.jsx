@@ -1,8 +1,10 @@
 import AuthForm from '@/components/Forms/AuthForm'
 
 
-const page = ({ searchParams }) => {
-  const error = searchParams?.error // Extract error message from URL
+const page = async ({ searchParams }) => {
+ // Extract error message from URL
+  const params = await searchParams; // unwrap the promise
+  const error = params?.error;
   
   return (
     <div className='flex min-h-screen items-center justify-center bg-gray-50 px-4'>

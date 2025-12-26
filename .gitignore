@@ -4,8 +4,9 @@
 backend/node_modules
 backend/.env
 backend/package-lock.json
+backend/index.log
 
-# Optional backend data/cache
+# Backend data/cache
 backend/data_response
 
 # -----------------------
@@ -16,6 +17,7 @@ frontend/.next
 frontend/out
 frontend/.env*
 frontend/package-lock.json
+frontend/coverage
 
 # Next.js build outputs
 frontend/.vercel
