@@ -14,7 +14,7 @@ export async function getJobs(
   return await supabase
     .from('jobs')
     .select(
-      'id, title, employer_name, posted_at, created_at, status', 
+      'id, title, employer_name, posted_at, created_at', 
       { count: 'exact' }
     )
     .order('posted_at', { ascending: false, nullsFirst: false })

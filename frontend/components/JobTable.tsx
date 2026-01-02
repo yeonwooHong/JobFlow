@@ -5,7 +5,6 @@ interface Job {
   employer_name: string;
   posted_at: string;
   created_at: string;
-  status: string;
 }
 
 // Define what data the JobTable component expects
@@ -47,6 +46,7 @@ export function JobTable({ jobs, error }: JobTableProps) {
             jobs.map((job) => {
               const dateStr = job.posted_at || job.created_at;
               const displayDate = dateStr ? dateStr.split('T')[0] : 'N/A';
+              const jobStatus = 'NOT APPLIED'; // job.user_jobs?.[0]?.status || 'not applied';
 
               return (
                 <tr key={job.id} className="hover:bg-slate-100 transition-colors">
@@ -59,8 +59,8 @@ export function JobTable({ jobs, error }: JobTableProps) {
                   <td className="px-6 py-4 text-slate-600">{job.employer_name}</td>
                   <td className="px-6 py-4 text-slate-600">{displayDate}</td>
                   <td className="px-6 py-4">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusStyle(job.status)}`}>
-                      {job.status || 'Pending'}
+                    <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusStyle(jobStatus)}`}>
+                      {jobStatus}
                     </span>
                   </td>
                 </tr>
