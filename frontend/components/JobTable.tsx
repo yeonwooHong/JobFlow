@@ -29,13 +29,15 @@ const getStatusStyle = (status: string) => {
 export function JobTable({ jobs, error }: JobTableProps) {
   return (
     <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-      <table className="w-full text-left border-collapse">
+      {/* Fixed table layout to not to break the widths */}
+      <table className="w-full text-left border-collapse table-fixed">
         <thead>
           <tr className="border-b border-slate-200 bg-slate-100">
-            <th className="px-6 py-4 text-sm font-semibold text-slate-600">Title</th>
-            <th className="px-6 py-4 text-sm font-semibold text-slate-600">Company</th>
-            <th className="px-6 py-4 text-sm font-semibold text-slate-600">Posted Date</th>
-            <th className="px-6 py-4 text-sm font-semibold text-slate-600">Status</th>
+            {/* Title column takes bigger proportion */}
+            <th className="w-[45%] px-6 py-4 text-sm font-semibold text-slate-600">Title</th>
+            <th className="w-[25%] px-6 py-4 text-sm font-semibold text-slate-600">Company</th>
+            <th className="w-[15%] px-6 py-4 text-sm font-semibold text-slate-600">Posted Date</th>
+            <th className="w-[15%] px-6 py-4 text-sm font-semibold text-slate-600">Status</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-slate-100">
@@ -48,7 +50,12 @@ export function JobTable({ jobs, error }: JobTableProps) {
 
               return (
                 <tr key={job.id} className="hover:bg-slate-100 transition-colors">
-                  <td className="px-6 py-4 font-semibold text-slate-900">{job.title}</td>
+                  {/* Added truncation and tooltip for long titles */}
+                  <td
+                    className="px-6 py-4 font-semibold text-slate-900 truncate"
+                    title={job.title} // Tooltip to show full title on hover
+                  >
+                    {job.title}</td>
                   <td className="px-6 py-4 text-slate-600">{job.employer_name}</td>
                   <td className="px-6 py-4 text-slate-600">{displayDate}</td>
                   <td className="px-6 py-4">
