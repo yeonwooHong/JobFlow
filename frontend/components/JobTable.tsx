@@ -1,3 +1,4 @@
+// Define Job object
 interface Job {
   id: string;
   title: string;
@@ -7,6 +8,7 @@ interface Job {
   status: string;
 }
 
+// Define what data the JobTable component expects
 interface JobTableProps {
   jobs: Job[] | null;
   error: any;
@@ -15,13 +17,13 @@ interface JobTableProps {
 const getStatusStyle = (status: string) => {
   // Status badges's color styles
   const s = status?.toLowerCase() || '';
-  if (s.includes('not applied')) return 'bg-gray-100 text-gray-700 border-gray-200';
-  if (s.includes('applied')) return 'bg-blue-100 text-blue-700 border-blue-200';
-  if (s.includes('interview')) return 'bg-purple-100 text-purple-700 border-purple-200';
-  if (s.includes('offer')) return 'bg-green-100 text-green-700 border-green-200';
+  if (s.includes('not applied')) return 'bg-gray-100 text-gray-700 border-gray-200'
+  if (s.includes('applied')) return 'bg-orange-100 text-orange-700 border-orange-200';
+  if (s.includes('interviewing')) return 'bg-purple-100 text-purple-700 border-purple-200';
+  if (s.includes('offered')) return 'bg-green-100 text-green-700 border-green-200';
   if (s.includes('rejected')) return 'bg-red-100 text-red-700 border-red-200';
-  if (s.includes('accepted')) return 'bg-orange-100 text-orange-700 border-orange-200';
-  return 'bg-gray-100 text-gray-600 border-gray-200'; // Default -> not applied, should deleted not applied?
+  if (s.includes('accepted')) return 'bg-blue-100 text-blue-700 border-blue-200';
+  return 'bg-gray-100 text-gray-700 border-gray-200';
 };
 
 export function JobTable({ jobs, error }: JobTableProps) {
