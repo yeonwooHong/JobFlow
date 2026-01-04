@@ -1,26 +1,26 @@
 # -----------------------
-# Backend (Node.js)
+# worker (Node.js)
 # -----------------------
-backend/node_modules
-backend/.env
-backend/package-lock.json
-backend/index.log
+/worker/node_modules
+/worker/.env
+/worker/package-lock.json
+/worker/index.log
 
-# Backend data/cache
-backend/data_response
+# worker data/cache
+/worker/data_response
 
 # -----------------------
-# Frontend (Next.js)
+# web (Next.js)
 # -----------------------
-frontend/node_modules
-frontend/.next
-frontend/out
-frontend/.env*
-frontend/package-lock.json
-frontend/coverage
+/web/node_modules
+/web/.next
+/web/out
+/web/.env*
+/web/package-lock.json
+/web/coverage
 
 # Next.js build outputs
-frontend/.vercel
+/web/.vercel
 
 # -----------------------
 # Common / Misc
@@ -36,4 +36,4 @@ yarn-error.log*
 
 # TypeScript
 *.tsbuildinfo
-frontend/next-env.d.ts
+/web/next-env.d.ts

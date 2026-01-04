@@ -1,6 +1,6 @@
 import { SupabaseClient } from '@supabase/supabase-js'
 
-//Fetches a paginated list of jobs from Supabase
+// Fetches a paginated list of jobs from Supabase
 export async function getJobs(
   supabase: SupabaseClient, 
   page: number, 
@@ -17,4 +17,22 @@ export async function getJobs(
   .select('*', { count: 'exact' })
   .eq('keyword_user_id', userId)
   .range(from, to);
+}
+
+// Updates the application status of a job for a specific user
+export async function updateJobStatus(
+  supabase: SupabaseClient,
+  jobId: string,
+  status: string,
+  userId: string) {
+  const { error } = await supabase
+    .from('user_jobs')
+    .upsert({ 
+      job_id: jobId, 
+      user_id: userId, 
+      status: status,
+      updated_at: new Date().toISOString()
+    }, { onConflict: 'job_id, user_id' }); // Only one status per user per job
+
+  return { error };
 }

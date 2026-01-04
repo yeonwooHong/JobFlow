@@ -1,3 +1,5 @@
+import { JOB_STATUS } from '@/lib/constants';
+
 // Define Job object
 interface Job {
   id: string;
@@ -14,8 +16,6 @@ interface JobTableProps {
   jobs: Job[] | null;
   error: any;
 }
-
-import { JOB_STATUS } from '@/lib/constants';
 
 export const getStatusStyle = (status: string) => {
   // Status badges's color styles
