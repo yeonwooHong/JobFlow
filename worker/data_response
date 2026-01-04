@@ -1,0 +1,55 @@
+{
+  "status": "OK",
+  "request_id": "ec229008-5cf8-4178-9cce-fb9fb76fafef",
+  "parameters": {
+    "query": "developer jobs in toronto",
+    "page": 1,
+    "num_pages": 1,
+    "date_posted": "month",
+    "country": "ca",
+    "language": "en"
+  },
+  "data": [
+    {
+      "job_id": "RbZ7QJlFU89pGki8AAAAAA==",
+      "job_title": "Sr. React.js developer with PHP Experience (Toronto, Hybrid)",
+      "employer_name": "TestingXperts",
+      "employer_logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEjUiJRSvHd-PGL3E3nnrxkOAT3UWKpQI1CLa_&s=0",
+      "employer_website": "https://www.testingxperts.com",
+      "job_publisher": "LinkedIn",
+      "job_employment_type": "Contractor",
+      "job_employment_types": [
+        "CONTRACTOR"
+      ],
+      "job_apply_link": "https://ca.linkedin.com/jobs/view/sr-react-js-developer-with-php-experience-toronto-hybrid-at-testingxperts-4322673804?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+      "job_apply_is_direct": false,
+      "apply_options": [
+        {
+          "publisher": "LinkedIn",
+          "apply_link": "https://ca.linkedin.com/jobs/view/sr-react-js-developer-with-php-experience-toronto-hybrid-at-testingxperts-4322673804?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+          "is_direct": false
+        }
+      ],
+      "job_description": "ROLE :: Sr. React.js developer with PHP Experience\n\nLocation :: Toronto , Canada\n\njob Description:-\n\n10 + years of experience building and optimizing complicated user interfaces and extensive experience working within large-scale development environments.\n\nStrong hands-on experience building/working large and complex client-facing web applications using ReactJS, HTML CSS, CMS/UI experience.\n\nDeveloping and implementing highly responsive user interface components using react concepts.\n\nMonitoring and improving front-end performance, documenting application changes, and developing updates.\n\nDeep experience building beautiful, intuitive, and accessible customer facing applications.\n\nExperience with frontend patterns, testing, debugging and performance.\n\nExperience in PHP is preferred.\n\nAbility to multi-task and prioritize in a fast-paced and dynamic work environment.\n\nSolid communication and written skills: ability to explain complex technical issues to both technical and non-technical audiences..\n\nStrong problem-solving mindset.",
+      "job_is_remote": false,
+      "job_posted_at": "1 day ago",
+      "job_posted_at_timestamp": 1763078400,
+      "job_posted_at_datetime_utc": "2025-11-14T00:00:00.000Z",
+      "job_location": "Toronto, ON",
+      "job_city": "Toronto",
+      "job_state": "Ontario",
+      "job_country": "CA",
+      "job_latitude": 43.653226,
+      "job_longitude": -79.3831843,
+      "job_benefits": null,
+      "job_google_link": "https://www.google.com/search?q=jobs&gl=ca&hl=en&udm=8#vhid=vt%3D20/docid%3DRbZ7QJlFU89pGki8AAAAAA%3D%3D&vssid=jobs-detail-viewer",
+      "job_salary": null,
+      "job_min_salary": null,
+      "job_max_salary": null,
+      "job_salary_period": null,
+      "job_highlights": {},
+      "job_onet_soc": "15113400",
+      "job_onet_job_zone": "3"
+    }
+  ]
+}

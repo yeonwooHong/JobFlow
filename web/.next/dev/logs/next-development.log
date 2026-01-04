@@ -1,0 +1,56 @@
+[00:27:40.213] Server  ERROR    ⨯ Error: Cannot find module 'next/dist/client/components/builtin/global-not-found'
+Require stack:
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/dev/on-demand-entry-handler.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/dev/hot-reloader-turbopack.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/lib/router-server.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/lib/start-server.js
+[00:27:40.384] Server  ERROR   Error: Cannot find module 'next/dist/pages/_error'
+Require stack:
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/dev/on-demand-entry-handler.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/dev/hot-reloader-turbopack.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/lib/router-server.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/lib/start-server.js
+[00:27:40.438] Server  ERROR    ⨯ Error: Cannot find module 'next/dist/pages/_error'
+Require stack:
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/dev/on-demand-entry-handler.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/dev/hot-reloader-turbopack.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/lib/router-server.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/lib/start-server.js
+[00:27:40.520] Server  ERROR   Error: Cannot find module 'next/dist/pages/_error'
+Require stack:
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/dev/on-demand-entry-handler.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/dev/hot-reloader-turbopack.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/lib/router-server.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/lib/start-server.js
+[00:27:40.801] Server  ERROR    ⨯ Error: Cannot find module 'next/dist/client/components/builtin/global-not-found'
+Require stack:
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/dev/on-demand-entry-handler.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/dev/hot-reloader-turbopack.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/lib/router-server.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/lib/start-server.js
+[00:27:40.864] Server  ERROR   Error: Cannot find module 'next/dist/pages/_error'
+Require stack:
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/dev/on-demand-entry-handler.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/dev/hot-reloader-turbopack.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/lib/router-server.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/lib/start-server.js
+[00:27:40.910] Server  ERROR    ⨯ Error: Cannot find module 'next/dist/pages/_error'
+Require stack:
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/dev/on-demand-entry-handler.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/dev/hot-reloader-turbopack.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/lib/router-server.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/lib/start-server.js
+[00:27:40.938] Server  ERROR   Error: Cannot find module 'next/dist/pages/_error'
+Require stack:
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/dev/on-demand-entry-handler.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/dev/hot-reloader-turbopack.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/lib/router-server.js
+- /Users/yeonu/Documents/02_Career/03_Pacemaker/01_Project/JobFlow/frontend/node_modules/next/dist/server/lib/start-server.js
