@@ -4,7 +4,8 @@ import { SupabaseClient } from '@supabase/supabase-js'
 export async function getJobs(
   supabase: SupabaseClient, 
   page: number, 
-  pageSize: number = 10
+  pageSize: number = 10,
+  userId: string
 ) {
   // Calculate the data range to retrieve
   const from = (page - 1) * pageSize
@@ -12,12 +13,8 @@ export async function getJobs(
 
   // Fetch data and total count using { count: 'exact' }
   return await supabase
-    .from('jobs')
-    .select(
-      'id, title, employer_name, posted_at, created_at', 
-      { count: 'exact' }
-    )
-    .order('posted_at', { ascending: false, nullsFirst: false })
-    .order('created_at', { ascending: false })
-    .range(from, to)
+  .from('v_user_job_list') // call the view instead of the table
+  .select('*', { count: 'exact' })
+  .eq('keyword_user_id', userId)
+  .range(from, to);
 }

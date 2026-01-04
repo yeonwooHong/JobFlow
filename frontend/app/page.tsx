@@ -22,7 +22,12 @@ export default async function Home({ searchParams }: {
     const currentPage = Number(params.page) || 1
 
     // Get job data from the service
-    const { data: jobs, error, count } = await getJobs(supabase, currentPage, pageSize)
+    const { data: jobs, error, count } = await getJobs(
+      supabase,
+      currentPage,
+      pageSize,
+      userData.data.user.id
+    )
 
     // Calculate total pages if there's count
     const totalPages = count ? Math.ceil(count / pageSize) : 0
