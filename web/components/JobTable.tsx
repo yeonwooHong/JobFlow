@@ -1,4 +1,10 @@
+'use client';
+
+import { useState } from 'react';
+import { createClient } from '@/app/utils/supabase/client';
 import { JOB_STATUS } from '@/lib/constants';
+import { updateJobStatus } from '@/lib/services/jobs';
+import { useRouter } from 'next/navigation';
 
 // Define Job object
 interface Job {
@@ -33,6 +39,29 @@ export const getStatusStyle = (status: string) => {
 };
 
 export function JobTable({ jobs, error }: JobTableProps) {
+  const supabase = createClient();
+  const router = useRouter();
+  const [isUpdating, setIsUpdating] = useState<string | null>(null); // To block multiple updates
+
+  const handleStatusChange = async (jobId: string, newStatus: string) => {
+    // Get current user
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return alert('Please log in to update job status.');
+
+    setIsUpdating(jobId); // Set updating state
+
+    const { error } = await updateJobStatus(supabase, jobId, newStatus, user.id);
+
+    if (error) {
+      console.error('Update failed:', error);
+      alert('Failed to update job status.');
+    } else {
+      // Refresh the server component data to reflect the View update
+      router.refresh();
+    }
+    setIsUpdating(null);
+  };
+
   return (
     <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
       {/* Fixed table layout to not to break the widths */}
@@ -51,7 +80,7 @@ export function JobTable({ jobs, error }: JobTableProps) {
             <tr><td colSpan={4} className="px-6 py-8 text-center text-red-500">Failed to load jobs.</td></tr>
           ) : jobs && jobs.length > 0 ? (
             jobs.map((job) => {
-              const jobStatus = job.application_status || JOB_STATUS.NOT_APPLIED;
+              const currentStatus = job.application_status || JOB_STATUS.NOT_APPLIED;
 
               return (
                 <tr key={job.id} className="hover:bg-slate-100 transition-colors">
@@ -63,11 +92,33 @@ export function JobTable({ jobs, error }: JobTableProps) {
                     {job.title}</td>
                   <td className="px-6 py-4 text-slate-600">{job.employer_name}</td>
                   <td className="px-6 py-4 text-slate-600">{job.recent_date ? job.recent_date.split('T')[0] : 'N/A'}</td>
+                  
+                  
                   <td className="px-6 py-4">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusStyle(jobStatus)}`}>
-                      {jobStatus}
-                    </span>
+                    {/* 드롭다운 스타일의 Select 태그 */}
+                    <div className="relative group">
+                      <select
+                        value={currentStatus}
+                        disabled={isUpdating === job.id}
+                        onChange={(e) => handleStatusChange(job.id, e.target.value)}
+                        className={`
+                          appearance-none cursor-pointer px-3 py-1 rounded-full text-xs font-medium border transition-all
+                          focus:outline-none focus:ring-2 focus:ring-slate-400
+                          ${getStatusStyle(currentStatus)}
+                          ${isUpdating === job.id ? 'opacity-50' : 'opacity-100'}
+                        `}
+                      >
+                        {Object.values(JOB_STATUS).map((status) => (
+                          <option key={status} value={status} className="bg-white text-slate-900">
+                            {status}
+                          </option>
+                        ))}
+                      </select>
+    
+                    </div>
                   </td>
+
+
                 </tr>
               );
             })
