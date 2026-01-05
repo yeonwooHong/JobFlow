@@ -46,19 +46,19 @@ export async function fetchJobs(query) {
             );
 
             if (hasOldJobs) {
-                logger.info(`[STOP] Old jobs (over 7 days) detected on page ${page}. Stop fetching.`);
+                logger.info(`[JOB FETCH STOP] Old jobs (over 7 days) detected on page ${page}. Stop fetching.`);
                 break;
             }
         } catch (error) {
             if (error.code === "ECONNABORTED") {
-                logger.warn(`[TIMEOUT] Request timed out on page ${page}. Skipping remaining pages.`);
+                logger.warn(`[JOB FETCH TIMEOUT] Request timed out on page ${page}. Skipping remaining pages.`);
                 break;
             }
-            logger.error(`[FATAL ERROR] Page ${page} failed:`, error.message);
+            logger.error(`[JOB FETCH FAIL] Page ${page} failed:`, error.message);
             throw err;
         }
     }
-    logger.info(`[FETCH END] Completed for query: "${query}"`);
+    logger.info(`[JOB FETCH SUCCESS] Completed for query: "${query}"`);
 }
 
 // Save data to DB
@@ -98,12 +98,12 @@ export async function saveJobsToSupabase(jobs) {
         if (error) throw error;
 
         if (data && data.length > 0) {
-            logger.info(`[DB SAVE] Successfully inserted ${data.length} jobs into Supabase.`);
+            logger.info(`[JOB SAVE SUCCESS] Successfully inserted ${data.length} jobs into Supabase.`);
         } else {
-            logger.info("[DB SAVE] No new jobs inserted (all duplicates).");
+            logger.info("[JOB SAVE SUCCESS] No new jobs inserted (all duplicates).");
         }
 
     } catch (error) {
-        logger.error("[DB ERROR] Failed to save jobs to Supabase:", error.message);
+        logger.error("[JOB SAVE FAIL] Failed to save jobs to Supabase:", error.message);
     }
 }

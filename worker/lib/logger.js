@@ -18,12 +18,14 @@ log4js.configure({
       keepFileExt: true,      // keep file extension (.log)
       daysToKeep: 30,         // keep logs for 30 days
       compress: true,         // compress old log files 
-      alwaysIncludePattern: true
+      alwaysIncludePattern: true // include date pattern in filename
     }
   },
   categories: {
-    // will change to info for production
-    default: { appenders: ['console', 'file'], level: 'debug' } // debug -> info -> warn -> error
+      default: {
+          appenders: ['console', 'file'],
+          level: 'debug' // will change to info for production
+    }
   }
 });
 
