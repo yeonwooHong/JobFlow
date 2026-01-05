@@ -84,30 +84,35 @@ export function JobTable({ jobs, error }: JobTableProps) {
 
               return (
                 <tr key={job.id} className="hover:bg-slate-100 transition-colors">
-                  {/* Added truncation and tooltip for long titles */}
+
+                {/* Job title */}
                   <td
                     className="px-6 py-4 font-semibold text-slate-900 truncate"
-                    title={job.title} // Tooltip to show full title on hover
+                    title={job.title} // Added truncation and tooltip to show full title on hover
                   >
                     {job.title}</td>
+                
+                {/* Employer name */}
                   <td className="px-6 py-4 text-slate-600">{job.employer_name}</td>
+                
+                {/* Posted Date */}
                   <td className="px-6 py-4 text-slate-600">{job.recent_date ? job.recent_date.split('T')[0] : 'N/A'}</td>
-                  
-                  
+
+                  {/* Status */}
                   <td className="px-6 py-4">
-                    {/* 드롭다운 스타일의 Select 태그 */}
                     <div className="relative group">
                       <select
                         value={currentStatus}
                         disabled={isUpdating === job.id}
                         onChange={(e) => handleStatusChange(job.id, e.target.value)}
                         className={`
-                          appearance-none cursor-pointer px-3 py-1 rounded-full text-xs font-medium border transition-all
+                          appearance-none cursor-pointer px-1 py-1 rounded-full text-xs text-center font-medium border transition-all
                           focus:outline-none focus:ring-2 focus:ring-slate-400
                           ${getStatusStyle(currentStatus)}
                           ${isUpdating === job.id ? 'opacity-50' : 'opacity-100'}
                         `}
                       >
+                        {/* Status dropdown options */}
                         {Object.values(JOB_STATUS).map((status) => (
                           <option key={status} value={status} className="bg-white text-slate-900">
                             {status}
@@ -117,7 +122,6 @@ export function JobTable({ jobs, error }: JobTableProps) {
     
                     </div>
                   </td>
-
 
                 </tr>
               );
