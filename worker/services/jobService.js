@@ -1,13 +1,17 @@
 import axios from "axios";
 import dotenv from "dotenv";
 import supabase from "../supabaseClient.js";
+import logger from '../lib/logger.js';
 
 dotenv.config();
 
 // Request Job data from the OpenAPI(JSearch)
 export async function fetchJobs(query) {
+    logger.info(`[JOB FETCH START] Query: "${query}" - Requesting up to 5 pages`);
     for (let page = 1; page <= 5; page++) {
         try {
+            logger.info(`[PAGE ${page}] Requesting jobs from API...`);
+            
             const response = await axios.get(process.env.RAPIDAPI_URL, {
                 params: {
                     query, // Refactor: User's initial setting
@@ -26,35 +30,35 @@ export async function fetchJobs(query) {
             const jobs = response.data?.data ?? [];
 
             if (jobs.length === 0) {
-                console.log("No more jobs, stop requesting.");
+                logger.warn(`[PAGE ${page}] No more jobs, stop fetching.`);
                 break;
             }
+
+            logger.info(`[PAGE ${page}] Successfully fetched ${jobs.length} jobs.`);
 
             await saveJobsToSupabase(response.data);
 
             // Stop early if the job is older then MAX_JOB_AGE_DAYS
             const MAX_JOB_AGE_DAYS = 7
             const cutoffDate = new Date(Date.now() - MAX_JOB_AGE_DAYS * 24 * 60 * 60 * 1000);
-
             const hasOldJobs = jobs.some(
                 job => new Date(job.job_posted_at_datetime_utc) < cutoffDate
             );
 
             if (hasOldJobs) {
-                console.log(`Old jobs detected, stopping pagination on page ${page}.`);
+                logger.info(`[STOP] Old jobs (over 7 days) detected on page ${page}. Stop fetching.`);
                 break;
             }
-        } catch (err) {
-            if (err.code === "ECONNABORTED") {
-                console.warn(
-                  `Request timed out on page ${page}. Stopping pagination.`
-                );
+        } catch (error) {
+            if (error.code === "ECONNABORTED") {
+                logger.warn(`[TIMEOUT] Request timed out on page ${page}. Skipping remaining pages.`);
                 break;
             }
-            console.error("Fail to fetch job data:", err.message);
+            logger.error(`[FATAL ERROR] Page ${page} failed:`, error.message);
             throw err;
         }
     }
+    logger.info(`[FETCH END] Completed for query: "${query}"`);
 }
 
 // Save data to DB
@@ -79,28 +83,27 @@ export async function saveJobsToSupabase(jobs) {
             keyword_id: 1 // Refactor: link to user's keyword setting
         }))
 
-        // Insert data into DB
+        logger.debug(`Trying to upsert ${jobsArray.length} jobs to Supabase.`);
+
+        // Upsert data into DB
         // Check the duplicated rows: job_id (unique)
         const { data, error } = await supabase
             .from('jobs')
             .upsert(jobsArray, {
                 onConflict: "job_id",
-                ignoreDuplicates: true,
-            });
-
-        if (error) {
-            console.error("Error occurs while inserting data into Supabase:", error);
-            throw error;
-        }
+                ignoreDuplicates: false,
+            }).select();
+        
+        // Supabase doesn't stop execution on error, so I need to manually check
+        if (error) throw error;
 
         if (data && data.length > 0) {
-            console.log(`Successfully inserted ${data.length} jobs into Supabase.`);
+            logger.info(`[DB SAVE] Successfully inserted ${data.length} jobs into Supabase.`);
         } else {
-            console.log("No new jobs inserted (all duplicates).");
+            logger.info("[DB SAVE] No new jobs inserted (all duplicates).");
         }
 
-    } catch (err) {
-        console.error("Fail to save job data:", err.message);
-        throw err;
+    } catch (error) {
+        logger.error("[DB ERROR] Failed to save jobs to Supabase:", error.message);
     }
 }
