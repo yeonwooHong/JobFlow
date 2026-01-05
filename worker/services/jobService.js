@@ -76,6 +76,7 @@ export async function saveJobsToSupabase(jobs) {
             longitude: job.job_longitude,
             is_remote: job.job_is_remote,
             posted_at: job.job_posted_at_datetime_utc,
+            keyword_id: 1 // Refactor: link to user's keyword setting
         }))
 
         // Insert data into DB

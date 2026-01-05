@@ -106,10 +106,11 @@ export function JobTable({ jobs, error }: JobTableProps) {
                         disabled={isUpdating === job.id}
                         onChange={(e) => handleStatusChange(job.id, e.target.value)}
                         className={`
-                          appearance-none cursor-pointer px-1 py-1 rounded-full text-xs text-center font-medium border transition-all
+                          appearance-none cursor-pointer px-2 py-1 rounded-full text-xs text-center font-medium border transition-all
                           focus:outline-none focus:ring-2 focus:ring-slate-400
                           ${getStatusStyle(currentStatus)}
-                          ${isUpdating === job.id ? 'opacity-50' : 'opacity-100'}
+                          // Dim the opacity when updating
+                          ${isUpdating === job.id ? 'opacity-20' : 'opacity-100'} 
                         `}
                       >
                         {/* Status dropdown options */}
