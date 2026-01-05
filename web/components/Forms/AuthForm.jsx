@@ -1,4 +1,5 @@
 'use client'
+
 import { useState } from 'react'
 import { signInWithGoogle } from '@/app/auth/authProvider'
 

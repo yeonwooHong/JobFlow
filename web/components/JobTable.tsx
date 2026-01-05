@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { createClient } from '@/app/utils/supabase/client';
 import { JOB_STATUS } from '@/lib/constants';
-import { updateJobStatus } from '@/lib/services/jobs';
+import { updateJobStatus } from '@/lib/services/jobs.server';
 import { useRouter } from 'next/navigation';
 
 // Define Job object
@@ -50,7 +50,7 @@ export function JobTable({ jobs, error }: JobTableProps) {
 
     setIsUpdating(jobId); // Set updating state
 
-    const { error } = await updateJobStatus(supabase, jobId, newStatus, user.id);
+    const { error } = await updateJobStatus(jobId, newStatus, user.id);
 
     if (error) {
       alert('Failed to update job status.');

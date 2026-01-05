@@ -9,7 +9,7 @@ const signInWith = (provider: any) => async () => {
     const supabase = await createClient()
     // Build callback URL
     const auth_callback_url = `${process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`
-    
+
     // Initiate OAuth flow
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider,
