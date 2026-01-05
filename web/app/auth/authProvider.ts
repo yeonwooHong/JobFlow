@@ -1,15 +1,16 @@
 'use server'
 import { createClient } from '@/app/utils/supabase/server'
 import { redirect } from 'next/navigation'
+import { logger } from '@/lib/logs/logger';
 
 
 const signInWith = (provider: any) => async () => {
-    // 1. Create Supabase client on server
+    // Create Supabase client on server
     const supabase = await createClient()
-    // 2. Build callback URL
+    // Build callback URL
     const auth_callback_url = `${process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`
     
-    // 3. Initiate OAuth flow
+    // Initiate OAuth flow
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider,
         options: {
@@ -24,10 +25,11 @@ const signInWith = (provider: any) => async () => {
 // } null
 
     if (error) {
+        logger.error(`[SIGN IN FAIL] Msg:${error.message}`);
         throw new Error(error.message)
     }
 
-    // 4. Redirect to Google's OAuth page
+    // Redirect to Google's OAuth page
     redirect(data.url) // data.url is Google's authorization URL
 }
 
@@ -35,7 +37,13 @@ const signInWithGoogle = signInWith('google')
 
 const signOut = async () => {
     const supabase = await createClient()
-    await supabase.auth.signOut()
+    const { data: { user } } = await supabase.auth.getUser();
+    
+    if (user) {
+        logger.info(`[SIGN OUT] User:${user.id}`);
+    }
+    
+    await supabase.auth.signOut();
 }
 
 export { signInWithGoogle, signOut }

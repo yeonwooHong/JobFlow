@@ -1,6 +1,5 @@
 import AuthForm from '@/components/Forms/AuthForm'
 
-
 const page = async ({ searchParams }) => {
  // Extract error message from URL
   const params = await searchParams; // unwrap the promise

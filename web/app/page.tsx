@@ -4,6 +4,7 @@ import { signOut } from './auth/authProvider'
 import { getJobs } from '@/lib/services/jobs'
 import { JobTable } from '@/components/JobTable'
 import { PaginationControls } from "@/components/PaginationControls"
+import { logger } from '@/lib/logs/logger'
 
 export default async function Home({ searchParams }: {
     searchParams: Promise<{ page?: string }>
@@ -32,10 +33,11 @@ export default async function Home({ searchParams }: {
     // Calculate total pages if there's count
     const totalPages = count ? Math.ceil(count / pageSize) : 0
 
-    if (error) {
-        console.error('Error fetching jobs:', error)
+   if (error) {
+        logger.error(`[JOB FETCH FAIL] User:${userData.data.user.id} | Msg:${error.message}`);
+    } else {
+        logger.info(`[JOB FETCH SUCCESS] User:${userData.data.user.id} | Page:${currentPage} | Count:${count}`);
     }
-    console.log('Number of fetched jobs:', jobs?.length)
 
     return (
         <main className="max-w-6xl mx-auto p-8 font-sans">

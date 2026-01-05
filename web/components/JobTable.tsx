@@ -53,7 +53,6 @@ export function JobTable({ jobs, error }: JobTableProps) {
     const { error } = await updateJobStatus(supabase, jobId, newStatus, user.id);
 
     if (error) {
-      console.error('Update failed:', error);
       alert('Failed to update job status.');
     } else {
       // Refresh the server component data to reflect the View update
