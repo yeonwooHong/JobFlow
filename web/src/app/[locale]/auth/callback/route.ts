@@ -1,10 +1,14 @@
-import { createClient } from '@/app/utils/supabase/server'
+import { createClient } from '../../utils/supabase/server'
 import { NextResponse, NextRequest } from 'next/server'
 import { logger } from '@/lib/logs/logger'
 
-export async function GET(request: NextRequest) {
+export async function GET(
+  request: NextRequest,
+{ params }: { params: Promise<{ locale: string }> }
+) {
   // Extract authorization code from URL
   const { searchParams, origin } = new URL(request.url) // String to URL obj
+  const { locale } = await params;
 
   // searchParams
   // URLSearchParams { 'code' => 'bdff58a2-8253-417d-b2ba-e398f889fc27' }
@@ -19,7 +23,10 @@ export async function GET(request: NextRequest) {
     // Redirect to home page on success
     if (!error) {
       logger.info(`[AUTH CALLBACK SUCCESS] Code exchanged for session`);
-      return NextResponse.redirect(`${origin}${next}`)
+      // 언어 정보가 포함된 URL로 리다이렉트 (예: http://localhost:3000/en/)
+      // 만약 next가 '/'라면 /en/ 가 됩니다.
+      const finalRedirectUrl = new URL(`/${locale}${next}`, origin);
+      return NextResponse.redirect(finalRedirectUrl)
     }
     logger.error(`[AUTH CALLBACK FAIL] Exchange failed | Msg:${error.message}`);
   } else {
@@ -28,5 +35,5 @@ export async function GET(request: NextRequest) {
   }
   
   // Redirect to error page on failure
-  return NextResponse.redirect(`${origin}/auth?error=auth_failed`)
+  return NextResponse.redirect(`${origin}/${locale}/auth?error=auth_failed`)
 }

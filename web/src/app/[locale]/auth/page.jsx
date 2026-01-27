@@ -1,9 +1,12 @@
 import AuthForm from '@/components/Forms/AuthForm'
+// getTranslations for server components
+import { getTranslations } from 'next-intl/server'
 
-const page = async ({ searchParams }) => {
+const page = async ({ params, searchParams }) => {
  // Extract error message from URL
-  const params = await searchParams; // unwrap the promise
-  const error = params?.error;
+  const { locale } = await params;
+  const { error } = await searchParams;
+  const t = await getTranslations('Auth');
   
   return (
     <div className='flex min-h-screen items-center justify-center bg-gray-50 px-4'>
@@ -11,10 +14,10 @@ const page = async ({ searchParams }) => {
         {/* Header */}
         <div className='text-center space-y-2'>
           <h1 className='text-3xl font-bold text-gray-900'>
-            Welcome to JobFlow
+          {t('title')}
           </h1>
           <p className='text-gray-600'>
-            Sign in to track your job applications
+          {t('subtitle')}
           </p>
         </div>
 
@@ -22,14 +25,14 @@ const page = async ({ searchParams }) => {
         {error === 'auth_failed' && (
           <div className='rounded-lg bg-red-50 border border-red-200 p-4'>
             <p className='text-sm text-red-800'>
-              Authentication failed. Please try again.
+              {t('error')}
             </p>
           </div>
         )}
 
         {/* Auth Form Card */}
         <div className='bg-white rounded-lg shadow border border-gray-200 p-8'>
-          <AuthForm />
+          <AuthForm locale={locale}/>
         </div>
       </div>
     </div>

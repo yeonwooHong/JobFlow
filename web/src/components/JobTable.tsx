@@ -1,10 +1,10 @@
 'use client';
-
 import { useState } from 'react';
-import { createClient } from '@/app/utils/supabase/client';
+import { createClient } from '@/app/[locale]/utils/supabase/client';
 import { JOB_STATUS } from '@/lib/constants';
 import { updateJobStatus } from '@/lib/services/jobs.server';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 // Define Job object
 interface Job {
@@ -39,6 +39,7 @@ export const getStatusStyle = (status: string) => {
 };
 
 export function JobTable({ jobs, error }: JobTableProps) {
+  const t = useTranslations('JobTable');
   const supabase = createClient();
   const router = useRouter();
   const [isUpdating, setIsUpdating] = useState<string | null>(null); // To block multiple updates
@@ -68,15 +69,15 @@ export function JobTable({ jobs, error }: JobTableProps) {
         <thead>
           <tr className="border-b border-slate-200 bg-slate-100">
             {/* Title column takes bigger proportion */}
-            <th className="w-[45%] px-6 py-4 text-sm font-semibold text-slate-600">Title</th>
-            <th className="w-[25%] px-6 py-4 text-sm font-semibold text-slate-600">Company</th>
-            <th className="w-[15%] px-6 py-4 text-sm font-semibold text-slate-600">Posted Date</th>
-            <th className="w-[15%] px-6 py-4 text-sm font-semibold text-slate-600">Status</th>
+            <th className="w-[45%] px-6 py-4 text-sm font-semibold text-slate-600">{t('columns.title')}</th>
+            <th className="w-[25%] px-6 py-4 text-sm font-semibold text-slate-600">{t('columns.company')}</th>
+            <th className="w-[15%] px-6 py-4 text-sm font-semibold text-slate-600">{t('columns.date')}</th>
+            <th className="w-[15%] px-6 py-4 text-sm font-semibold text-slate-600">{t('columns.status')}</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-slate-100">
           {error ? (
-            <tr><td colSpan={4} className="px-6 py-8 text-center text-red-500">Failed to load jobs.</td></tr>
+            <tr><td colSpan={4} className="px-6 py-8 text-center text-red-500">{t('messages.error')}</td></tr>
           ) : jobs && jobs.length > 0 ? (
             jobs.map((job) => {
               const currentStatus = job.application_status || JOB_STATUS.NOT_APPLIED;
@@ -115,7 +116,8 @@ export function JobTable({ jobs, error }: JobTableProps) {
                         {/* Status dropdown options */}
                         {Object.values(JOB_STATUS).map((status) => (
                           <option key={status} value={status} className="bg-white text-slate-900">
-                            {status}
+                            {/* Replace spaces with underscores for translation key */}
+                            {t(`status.${status.replace(/\s+/g, '_')}`)}
                           </option>
                         ))}
                       </select>
@@ -127,7 +129,7 @@ export function JobTable({ jobs, error }: JobTableProps) {
               );
             })
           ) : (
-            <tr><td colSpan={4} className="px-6 py-12 text-center text-slate-400">No job applications found.</td></tr>
+            <tr><td colSpan={4} className="px-6 py-12 text-center text-slate-400">{t('messages.empty')}</td></tr>
           )}
         </tbody>
       </table>

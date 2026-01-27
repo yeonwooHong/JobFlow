@@ -1,14 +1,16 @@
 'use server'
-import { createClient } from '@/app/utils/supabase/server'
+import { createClient } from '../utils/supabase/server';
 import { redirect } from 'next/navigation'
 import { logger } from '@/lib/logs/logger';
 
 
-const signInWith = (provider: any) => async () => {
+const signInWith = (provider: any) => async (locale: string) => {
     // Create Supabase client on server
     const supabase = await createClient()
+
     // Build callback URL
-    const auth_callback_url = `${process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`
+    const siteUrl = process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL;
+    const auth_callback_url = `${siteUrl}/${locale}/auth/callback`
 
     // Initiate OAuth flow
     const { data, error } = await supabase.auth.signInWithOAuth({

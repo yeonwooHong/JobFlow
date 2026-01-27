@@ -1,0 +1,36 @@
+{
+  "Auth": {
+    "title": "Welcome to JobFlow",
+    "subtitle": "Sign in to track your job applications",
+    "error": "Authentication failed. Please try again.",
+    "googleButton": "Continue with Google",
+    "signingIn": "Signing in..."
+  },
+  "Dashboard": {
+    "title": "Job Applications",
+    "description": "Track and manage your job search journey ✨",
+    "signOut": "Sign Out"
+  },
+  "JobTable": {
+    "columns": {
+      "title": "Title",
+      "company": "Company",
+      "date": "Posted Date",
+      "status": "Status"
+    },
+    "messages": {
+      "error": "Failed to load jobs.",
+      "empty": "No job applications found.",
+      "loginRequired": "Please log in to update job status.",
+      "updateError": "Failed to update job status."
+    },
+    "status": {
+      "NOT_APPLIED": "NOT APPLIED",
+      "APPLIED": "APPLIED",
+      "INTERVIEWING": "INTERVIEWING",
+      "OFFERED": "OFFERED",
+      "REJECTED": "REJECTED",
+      "ACCEPTED": "ACCEPTED"
+    }
+  }
+}

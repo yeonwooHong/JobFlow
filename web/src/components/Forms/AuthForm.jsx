@@ -1,17 +1,18 @@
 'use client'
-
 import { useState } from 'react'
-import { signInWithGoogle } from '@/app/auth/authProvider'
+import { signInWithGoogle } from '@/app/[locale]/auth/authProvider'
+import { useTranslations } from 'next-intl' // useTranslations for client components
 
 
-const AuthForm = () => {
+const AuthForm = ({ locale }) => {
+  const t = useTranslations('Auth');
   const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsLoading(true)
     try {
-      await signInWithGoogle()
+      await signInWithGoogle(locale)
     } catch (error) {
       console.error('Sign in error:', error)
       setIsLoading(false)
@@ -47,7 +48,7 @@ const AuthForm = () => {
                 d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
               />
             </svg>
-            <span>Signing in...</span>
+            <span>{t('signingIn')}</span>
           </>
         ) : (
           <>
@@ -75,7 +76,7 @@ const AuthForm = () => {
                 fill='#EA4335'
               />
             </svg>
-            <span>Continue with Google</span>
+            <span>{t('googleButton')}</span>
           </>
         )}
       </button>
