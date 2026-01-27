@@ -3,37 +3,44 @@
 
 This project is a job-tracking web application built using:
 
-* **Next.js (Frontend)**
-* **Supabase (Backend + Database + Auth)**
-* **Node.js (Backend)**
+- **Next.js (Web Application)**: Handles the full-stack user experience, including dashboard, auth, and data display.
 
-The MVP focuses on collecting job postings via external APIs, displaying them on a dashboard, and allowing users to track their application status.  
-Later, the project will expand with AI to summarize job descriptions.
+- **Supabase (Backend + Database + Auth)**: Provides PostgreSQL database, secure authentication, and Row Level Security (RLS).
+
+- **Node.js (Worker)**: A background engine for periodic data collection and future AI processing.
+
+The MVP focuses on collecting job postings via external APIs, displaying them on a dashboard, and allowing users to track their application status.
+
+Later, the project will expand with AI (integrated into the Worker) to summarize job descriptions.
 
 
 ## 👉 Tech Stack
 
-### Frontend
+### Web Service (web)
+- Next.js (App Router)
+- Tailwind CSS
 
-* Next.js
-* Tailwind CSS
+### Data Engine (worker)
+- Node.js
+- External API Integration (RapidAPI - JSearch)
+- node-cron (Scheduled Tasks)
 
 ### Backend / Database
-
-* Node.js
-* Supabase
+- Supabase (Auth & PostgreSQL)
 
 ## 👉 Features (MVP)
 
 ### User Authentication
 
 * Google login via Supabase Auth
+* Secure data access through Row Level Security (RLS)
 
 ### Job Postings
 
 * Fetch job data via an external API (RapidAPI - JSearch)
 * Save job postings into the Supabase jobs table
-* Display jobs in a table
+* Use a SQL View (v_user_job_list) to join job data with user-specific application statuses.
+* Sorted by recent_date (prioritizing posted_at over created_at).
 
 ### Job Details
 
@@ -42,15 +49,16 @@ Later, the project will expand with AI to summarize job descriptions.
 
 ### Status Tracking
 
-* Update status tags:
+* Update status tags for specific jobs::
   * Not applied
   * Applied
   * Interviewing
   * Rejected
   * Offered
+  * Accepted
 
 ### Sorting & Filtering
 
 * Filter by status
-* Sort by posted date
+* Advanced sorting by the most recent and relevant posting dates.
 

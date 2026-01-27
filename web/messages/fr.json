@@ -1,0 +1,36 @@
+{
+  "Auth": {
+    "title": "Bienvenue sur JobFlow",
+    "subtitle": "Connectez-vous pour suivre vos candidatures",
+    "error": "Échec de l'authentification. Veuillez réessayer.",
+    "googleButton": "Continuer avec Google",
+    "signingIn": "Connexion en cours..."
+  },
+  "Dashboard": {
+    "title": "Candidatures",
+    "description": "Suivez et gérez votre parcours de recherche d’emploi ✨",
+    "signOut": "Se déconnecter"
+  },
+  "JobTable": {
+    "columns": {
+      "title": "Intitulé",
+      "company": "Entreprise",
+      "date": "Date de publication",
+      "status": "Statut"
+    },
+    "messages": {
+      "error": "Échec du chargement des candidatures.",
+      "empty": "Aucune candidature trouvée.",
+      "loginRequired": "Veuillez vous connecter pour mettre à jour le statut.",
+      "updateError": "Échec de la mise à jour du statut."
+    },
+    "status": {
+      "NOT_APPLIED": "NON POSTULÉ",
+      "APPLIED": "POSTULÉ",
+      "INTERVIEWING": "EN ENTRETIEN",
+      "OFFERED": "OFFRE REÇUE",
+      "REJECTED": "REFUSÉE",
+      "ACCEPTED": "ACCEPTÉE"
+    }
+  }
+}
