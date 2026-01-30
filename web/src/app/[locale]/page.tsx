@@ -11,19 +11,18 @@ export default async function Home(props: {
     params: Promise<{ locale: string }>;
     searchParams: Promise<{ page?: string }>;
 }) {
-    // 1. 모든 비동기 파라미터를 먼저 해결합니다. (React 19 필수)
     const [params, sParams] = await Promise.all([props.params, props.searchParams]);
     const locale = params.locale;
     const currentPage = Number(sParams.page) || 1;
 
-    // 2. 번역 훅을 호출합니다.
+    // Get translations for the Dashboard page
     const t = await getTranslations('Dashboard');
 
-    // 3. Supabase 클라이언트 생성 및 인증 확인
+    // Create Supabase client and get the current user
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();
 
-    // 사용자가 없으면 해당 언어의 auth 페이지로 이동
+    // If no user, redirect to auth page - keep the language setting
     if (!user) {
         redirect(`/${locale}/auth`);
     }

@@ -29,12 +29,12 @@ export default async function RootLayout(props: {
   const params = await props.params;
   const locale = params.locale;
   
-  // 지원하지 않는 언어로 접속 시 404 처리
+  // When trying to access a locale(language) that is not supported, show 404 page
   if (!routing.locales.includes(locale as any)) {
     notFound();
   }
 
-  // 서버에서 해당 언어의 번역 메시지를 가져옵니다.
+  // Get the translation messages for the specified language on the server side.
   const messages = await getMessages();
 
   return (
@@ -43,6 +43,7 @@ export default async function RootLayout(props: {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {/* To make it able to use useTranslations */}
+        {/* Pass the selected language information to the client side */}
         <NextIntlClientProvider messages={messages} locale={locale}> 
           {props.children}
         </NextIntlClientProvider>

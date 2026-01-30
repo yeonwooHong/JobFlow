@@ -3,7 +3,7 @@
 
 This project is a job-tracking web application built using:
 
-- **Next.js (Web Application)**: Handles the full-stack user experience, including dashboard, auth, and data display.
+- **Next.js (Web Application)**: Handles the full-stack user experience, including dashboard, auth, and data display. Supports multi-language (i18n) for global accessibility.
 
 - **Supabase (Backend + Database + Auth)**: Provides PostgreSQL database, secure authentication, and Row Level Security (RLS).
 
@@ -19,6 +19,7 @@ Later, the project will expand with AI (integrated into the Worker) to summarize
 ### Web Service (web)
 - Next.js (App Router)
 - Tailwind CSS
+- next-intl (Internationalization)
 
 ### Data Engine (worker)
 - Node.js
@@ -34,6 +35,11 @@ Later, the project will expand with AI (integrated into the Worker) to summarize
 
 * Google login via Supabase Auth
 * Secure data access through Row Level Security (RLS)
+
+### Multi-language Support (i18n)
+* English & French support: Fully localized UI including dashboards, forms, and status tags.
+* Dynamic Routing: URL-based language switching (e.g., `/en/dashboard`, `/fr/dashboard`).
+* Automatic Detection: Middleware-based language detection and redirection.
 
 ### Job Postings
 
