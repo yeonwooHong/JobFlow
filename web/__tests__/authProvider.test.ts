@@ -3,13 +3,21 @@
 // 1. Create a server side Supabse client -> Mock
 // 2. Call supabase.auth.signInWithOAuth -> Mock
 // 3. Google's redirect URL -> Mock
-import { signInWithGoogle } from '@/app/auth/authProvider'
-import { createClient } from '@/app/utils/supabase/server'
+import { signInWithGoogle } from '@/app/[locale]/auth/authProvider'
+import { createClient } from '@/app/[locale]/utils/supabase/server'
 import { redirect } from 'next/navigation'
 
+// To remove logger errors during tests
+jest.mock('@/lib/logs/logger', () => ({
+  logger: {
+    info: jest.fn(),
+    error: jest.fn(),
+    warn: jest.fn(),
+  },
+}));
 
 // Mock Supabase client
-jest.mock('@/app/utils/supabase/server') 
+jest.mock('@/app/[locale]/utils/supabase/server') 
 // Mock redirect
 jest.mock('next/navigation') 
 
@@ -26,6 +34,7 @@ describe('signInWithGoogle', () => {
 
   // Test: Google OAuth login success
   it('should redirect to Google OAuth URL on success', async () => {
+    const testLocale = 'fr'; // Language setting
     const mockSupabase = {
       auth: {
         // fn.().mockResolvedValue to mock async functions in async tests
@@ -41,14 +50,14 @@ describe('signInWithGoogle', () => {
     mockCreateClient.mockResolvedValue(mockSupabase as any)
 
     // Wait for function to complete
-    await signInWithGoogle()
+    await signInWithGoogle(testLocale)
     // Asserts createClient was called
     expect(mockCreateClient).toHaveBeenCalled()
     // Asserts signInWithOAuth was called with the expected arguments
     expect(mockSupabase.auth.signInWithOAuth).toHaveBeenCalledWith({
       provider: 'google',
       options: {
-        redirectTo: 'http://localhost:3000/auth/callback',
+        redirectTo: `http://localhost:3000/${testLocale}/auth/callback`,
       },
     })
     // Asserts redirect was called with the Google OAuth URL
@@ -69,7 +78,7 @@ describe('signInWithGoogle', () => {
     mockCreateClient.mockResolvedValue(mockSupabase as any)
 
     // Asserts the function rejects and throws an error with the expected message
-    await expect(signInWithGoogle()).rejects.toThrow('OAuth failed')
+    await expect(signInWithGoogle('en')).rejects.toThrow('OAuth failed')
     // Asserts redirect was not called on error
     expect(mockRedirect).not.toHaveBeenCalled()
   })
