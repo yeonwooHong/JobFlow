@@ -15,7 +15,7 @@ const config: Config = {
   // setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   // To map @/ to the project root
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/$1',
+    '^@/(.*)$': '<rootDir>/src/$1',
   },
 }
  

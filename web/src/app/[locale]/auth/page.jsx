@@ -1,6 +1,7 @@
 import AuthForm from '@/components/Forms/AuthForm'
 // getTranslations for server components
 import { getTranslations } from 'next-intl/server'
+import LanguageSwitcher from '@/components/LanguageSwitcher'
 
 const page = async ({ params, searchParams }) => {
  // Extract error message from URL
@@ -10,6 +11,12 @@ const page = async ({ params, searchParams }) => {
   
   return (
     <div className='flex min-h-screen items-center justify-center bg-gray-50 px-4'>
+      
+      {/* Language Switcher Top Right */}
+      <div className="absolute top-6 right-6">
+        <LanguageSwitcher />
+      </div>
+      
       <div className='w-full max-w-md space-y-6'>
         {/* Header */}
         <div className='text-center space-y-2'>
