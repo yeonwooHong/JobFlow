@@ -6,6 +6,7 @@ import { JobTable } from '@/components/JobTable'
 import { PaginationControls } from "@/components/PaginationControls"
 import { logger } from '@/lib/logs/logger'
 import { getTranslations } from 'next-intl/server';
+import LanguageSwitcher from '@/components/LanguageSwitcher'
 
 export default async function Home(props: {
     params: Promise<{ locale: string }>;
@@ -50,6 +51,7 @@ export default async function Home(props: {
 
     return (
         <main className="max-w-6xl mx-auto p-8 font-sans">
+
             {/* Header */}
             <div className="flex justify-between items-start mb-8">
                 <div>
@@ -68,6 +70,11 @@ export default async function Home(props: {
             {/* Pagination - added margin top 5 for visual separation */}
             <div className="mt-5">
                 <PaginationControls currentPage={currentPage} totalPages={totalPages} />
+            </div>
+            
+            {/* Language Switcher Bottom Right */}
+            <div className="fixed bottom-6 right-6 z-50">
+                <LanguageSwitcher />
             </div>
         </main>
     )
